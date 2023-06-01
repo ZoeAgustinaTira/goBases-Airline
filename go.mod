@@ -1,3 +1,3 @@
-module github.com/bootcamp-go/desafio-go-bases
+module github.com/ZoeAgustinaTira/goBases-Airline
 
-go 1.17
+go 1.20
