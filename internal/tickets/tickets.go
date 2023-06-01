@@ -1,11 +1,26 @@
 package tickets
 
-/*
-// ejemplo 1
-func GetTotalTickets(destination string) (int, error) {
-	return 0,nil
+import (
+	"fmt"
+
+	"github.com/ZoeAgustinaTira/goBases-Airline/internal/tickets/repository"
+)
+
+func GetTotalTicketsByDestination(destination string) (int, error) {
+	count := 0
+	for _, ticket := range repository.TicketList {
+		if ticket.Country == destination {
+			count++
+		}
+	}
+	if count == 0 {
+		return 0, fmt.Errorf("no passengers for destination: %s", destination)
+	}
+
+	return count, nil
 }
 
+/*
 // ejemplo 2
 func GetMornings(time string) (int, error) {}
 
