@@ -22,7 +22,7 @@ func AverageDestination(ch chan string, destination string) {
 
 }
 
-func GetTotalTicketsByDestination(destination string) (string, error) {
+func GetTotalTicketsByDestination(ch chan string, destination string) {
 	count := 0
 	for _, ticket := range repository.TicketList {
 		if ticket.Country == destination {
@@ -30,10 +30,10 @@ func GetTotalTicketsByDestination(destination string) (string, error) {
 		}
 	}
 	if count == 0 {
-		return "", fmt.Errorf("no passengers for destination: %s", destination)
+		ch <- fmt.Sprintf("no passengers for destination: %s", destination)
 	}
 
-	return fmt.Sprintf("There are %d passengers flying to %s", count, destination), nil
+	ch <- fmt.Sprintf("There are %d passengers flying to %s", count, destination)
 }
 
 func GetCountByPeriod(ch chan string, period string) {
