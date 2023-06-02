@@ -1,15 +1,12 @@
 package tickets
 
 import (
-
+	"fmt"
 	"github.com/ZoeAgustinaTira/goBases-Airline/domain"
 	"github.com/ZoeAgustinaTira/goBases-Airline/internal/tickets/repository"
-	"fmt"
-  	"strconv"
+	"strconv"
 	"strings"
-
 )
-
 
 func AverageDestination(destination string) (float64, error) {
 	var ticketbc []domain.Ticket
@@ -23,7 +20,7 @@ func AverageDestination(destination string) (float64, error) {
 
 	return avg, nil
 
-
+}
 
 func GetTotalTicketsByDestination(destination string) (int, error) {
 	count := 0
