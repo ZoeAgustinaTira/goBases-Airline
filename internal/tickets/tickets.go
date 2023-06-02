@@ -3,23 +3,25 @@ package tickets
 import (
 	"fmt"
 	"github.com/ZoeAgustinaTira/goBases-Airline/internal/tickets/repository"
-	"strconv"
+  	"strconv"
 	"strings"
+
 )
 
-/*
-// ejemplo 1
-func GetTotalTickets(destination string) (int, error) {
-
-		return 0,nil
+func GetTotalTicketsByDestination(destination string) (int, error) {
+	count := 0
+	for _, ticket := range repository.TicketList {
+		if ticket.Country == destination {
+			count++
+		}
+	}
+	if count == 0 {
+		return 0, fmt.Errorf("no passengers for destination: %s", destination)
 	}
 
-// ejemplo 2
-func GetMornings(time string) (int, error) {}
+	return count, nil
+}
 
-// ejemplo 3
-func AverageDestination(destination string, total int) (int, error) {}
-*/
 func GetCountByPeriod(ch chan string, period string) {
 	var from, to int
 	switch period {
