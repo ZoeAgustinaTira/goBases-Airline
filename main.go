@@ -7,14 +7,11 @@ import (
 )
 
 func main() {
+	ch := make(chan string)
+
 	reader.ReadFile()
 
-	avg, err := tickets.AverageDestination("Brazil")
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	fmt.Println(avg)
-
+	go tickets.AverageDestination(ch, "Brazil")
 
 	total, err := tickets.GetTotalTicketsByDestination("Brazil")
 	if err != nil {
@@ -22,11 +19,8 @@ func main() {
 	}
 	fmt.Println(total)
 
-	ch := make(chan string)
-
 	go tickets.GetCountByPeriod(ch, "night")
 
 	fmt.Println(<-ch)
-
 
 }

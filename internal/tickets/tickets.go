@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func AverageDestination(destination string) (string, error) {
+func AverageDestination(ch chan string, destination string) {
 	var ticketbc []domain.Ticket
 
 	for _, ticket := range repository.TicketList {
@@ -18,7 +18,7 @@ func AverageDestination(destination string) (string, error) {
 	}
 	avg := float64(len(ticketbc)) * 100.0 / float64(len(repository.TicketList))
 
-	return fmt.Sprintf("The average number of flights to the destination %s is %.2f", destination, avg), nil
+	ch <- fmt.Sprintf("The average number of flights to the destination %s is %.2f", destination, avg)
 
 }
 
