@@ -9,6 +9,13 @@ import (
 func main() {
 	reader.ReadFile()
 
+	avg, err := tickets.AverageDestination("Brazil")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(avg)
+
+
 	total, err := tickets.GetTotalTicketsByDestination("Brazil")
 	if err != nil {
 		fmt.Println(err.Error())

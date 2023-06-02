@@ -1,12 +1,29 @@
 package tickets
 
 import (
-	"fmt"
+
+	"github.com/ZoeAgustinaTira/goBases-Airline/domain"
 	"github.com/ZoeAgustinaTira/goBases-Airline/internal/tickets/repository"
+	"fmt"
   	"strconv"
 	"strings"
 
 )
+
+
+func AverageDestination(destination string) (float64, error) {
+	var ticketbc []domain.Ticket
+
+	for _, ticket := range repository.TicketList {
+		if ticket.Country == destination {
+			ticketbc = append(ticketbc, ticket)
+		}
+	}
+	avg := float64(len(ticketbc)) * 100.0 / float64(len(repository.TicketList))
+
+	return avg, nil
+
+
 
 func GetTotalTicketsByDestination(destination string) (int, error) {
 	count := 0
@@ -53,4 +70,5 @@ func GetCountByPeriod(ch chan string, period string) {
 	}
 
 	ch <- fmt.Sprintf("There are %d passengers flying in that time period %s", count, period)
+
 }
