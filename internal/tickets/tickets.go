@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func AverageDestination(destination string) (float64, error) {
+func AverageDestination(destination string) (string, error) {
 	var ticketbc []domain.Ticket
 
 	for _, ticket := range repository.TicketList {
@@ -18,11 +18,11 @@ func AverageDestination(destination string) (float64, error) {
 	}
 	avg := float64(len(ticketbc)) * 100.0 / float64(len(repository.TicketList))
 
-	return avg, nil
+	return fmt.Sprintf("The average number of flights to the destination %s is %.2f", destination, avg), nil
 
 }
 
-func GetTotalTicketsByDestination(destination string) (int, error) {
+func GetTotalTicketsByDestination(destination string) (string, error) {
 	count := 0
 	for _, ticket := range repository.TicketList {
 		if ticket.Country == destination {
@@ -30,10 +30,10 @@ func GetTotalTicketsByDestination(destination string) (int, error) {
 		}
 	}
 	if count == 0 {
-		return 0, fmt.Errorf("no passengers for destination: %s", destination)
+		return "", fmt.Errorf("no passengers for destination: %s", destination)
 	}
 
-	return count, nil
+	return fmt.Sprintf("There are %d passengers flying to %s", count, destination), nil
 }
 
 func GetCountByPeriod(ch chan string, period string) {
